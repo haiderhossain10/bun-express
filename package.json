@@ -12,6 +12,7 @@
         "@types/cors": "^2.8.17",
         "@types/express": "^5.0.0",
         "@types/morgan": "^1.9.9",
+        "@vercel/node": "^5.1.10",
         "prisma": "^6.4.1"
     },
     "peerDependencies": {

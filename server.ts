@@ -1,6 +1,6 @@
 import "dotenv/config"; // Load environment variables
 import app from "./app";
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const PORT = process.env.PORT || 3000;
 
