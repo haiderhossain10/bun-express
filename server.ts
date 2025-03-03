@@ -1,19 +1,17 @@
-import "dotenv/config";
+import "dotenv/config"; // Load environment variables
 import app from "./app";
-import fs from "fs";
-import dotenv from "dotenv";
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on port ${PORT}`);
-});
+// Only run server if it's not in Vercel (local mode)
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server is running on port ${PORT}`);
+    });
+}
 
-// Watch for changes in .env file
-fs.watch(".env", (e) => {
-    if (e === "change") {
-        console.log("🔄 Reloading .env file...");
-        dotenv.config({ override: true });
-        console.log("✅ .env file reloaded! New PORT:", process.env.PORT);
-    }
-});
+// Vercel API Handler
+export default function handler(req: VercelRequest, res: VercelResponse) {
+    return app(req, res);
+}
